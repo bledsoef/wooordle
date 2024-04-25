@@ -11,9 +11,6 @@ export default function Home() {
   const [correct, setCorrect] = useState(false)
   const handleEnter = () => {
     setGuessesCount(guessesCount + 1)
-    if (guessesCount == 10) {
-      setShowModal(true)
-    }
   }
   const handleCorrect = () => {
     setShowModal(true)
@@ -26,8 +23,8 @@ export default function Home() {
     <main className="min-h-screen items-center w-full pt-24 bg-neutral-900">
       {play && <Navbar guesses={guessesCount}/>}
       {!play && <LandingPage onPlay={handlePlay}/>}
-      {!showModal && play && <Wordle onEnter={handleEnter} onCorrect={handleCorrect} wordOfDay={"equivocal"}/>}
-      {showModal && <Modal guesses={guessesCount} correct={correct}/>}
+      {!(showModal || guessesCount == 10) && play && <Wordle onEnter={handleEnter} onCorrect={handleCorrect} wordOfDay={"equivocal"}/>}
+      {(showModal || guessesCount == 10) && <Modal guesses={guessesCount} correct={correct}/>}
     </main>
   );
 }
