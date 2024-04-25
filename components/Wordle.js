@@ -227,17 +227,17 @@ export default function Wordle({onEnter, onCorrect, wordOfDay}) {
     for (let i = 0; i < 3; i++) {
         let temp = []
         if (i == 0) {
-          row1.forEach((key, j) => temp.push(<button key={`${i}_${j}`} className="uppercase rounded-lg md:text-2xl text-xl font-semibold bg-gray-400 md:w-16 w-12 h-20" onClick={handleClick} value={key}>{key}</button>))
+          row1.forEach((key, j) => temp.push(<button key={`${i}_${j}`} className="uppercase rounded-lg md:text-2xl text-xl font-semibold bg-gray-400 md:w-16 w-12 h-24" onClick={handleClick} value={key}>{key}</button>))
         } else if (i == 1) {
-          row2.forEach((key, j) => temp.push(<button key={`${i}_${j}`} className="uppercase rounded-lg md:text-2xl text-xl font-semibold bg-gray-400 md:w-16 w-12 h-20" onClick={handleClick} value={key}>{key}</button>))
+          row2.forEach((key, j) => temp.push(<button key={`${i}_${j}`} className="uppercase rounded-lg md:text-2xl text-xl font-semibold bg-gray-400 md:w-16 w-12 h-24" onClick={handleClick} value={key}>{key}</button>))
         } else if (i == 2) {
           row3.forEach((key, j) => {
             if (key == "enter") {
-              temp.push(<button key={`${i}_${j}`} className="uppercase rounded-lg md:text-md text-sm font-semibold bg-gray-400 md:w-24 w-16 h-20" onClick={handleEnter} value={key}>{key}</button>)
+              temp.push(<button key={`${i}_${j}`} className="uppercase rounded-lg md:text-md text-sm font-semibold bg-gray-400 md:w-24 w-16 h-24" onClick={handleEnter} value={key}>{key}</button>)
             } else if (key == "delete") {
-              temp.push(<button key={`${i}_${j}`} className="uppercase rounded-lg md:text-md text-sm font-semibold bg-gray-400 md:w-24 w-16 h-20" onClick={handleDelete} value={key}>{key}</button>)
+              temp.push(<button key={`${i}_${j}`} className="uppercase rounded-lg md:text-md text-sm font-semibold bg-gray-400 md:w-24 w-16 h-24" onClick={handleDelete} value={key}>{key}</button>)
             } else {
-              temp.push(<button key={`${i}_${j}`} className="uppercase rounded-lg md:text-2xl text-xl font-semibold bg-gray-400 md:w-16 w-12 md:h-20" onClick={handleClick} value={key}>{key}</button>)
+              temp.push(<button key={`${i}_${j}`} className="uppercase rounded-lg md:text-2xl text-xl font-semibold bg-gray-400 md:w-16 w-12 h-24" onClick={handleClick} value={key}>{key}</button>)
             }
           })
         }
