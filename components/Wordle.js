@@ -236,21 +236,21 @@ export default function Wordle({onEnter, onCorrect, wordOfDay}) {
     for (let i = 0; i < 3; i++) {
         let temp = []
         if (i == 0) {
-          row1.forEach((key, j) => temp.push(<button key={`${i}_${j}`} className={`uppercase rounded-lg md:text-3xl text-xl font-semibold ${letterStatus[key]} md:w-16 w-12 h-24`} onClick={handleClick} value={key}>{key}</button>))
+          row1.forEach((key, j) => temp.push(<button key={`${i}_${j}`} className={`uppercase rounded-lg md:text-3xl text-2xl font-semibold ${letterStatus[key]} w-full h-24`} onClick={handleClick} value={key}>{key}</button>))
         } else if (i == 1) {
-          row2.forEach((key, j) => temp.push(<button key={`${i}_${j}`} className={`uppercase rounded-lg md:text-3xl text-xl font-semibold ${letterStatus[key]} md:w-16 w-12 h-24`} onClick={handleClick} value={key}>{key}</button>))
+          row2.forEach((key, j) => temp.push(<button key={`${i}_${j}`} className={`uppercase rounded-lg md:text-3xl text-2xl font-semibold ${letterStatus[key]} w-full h-24`} onClick={handleClick} value={key}>{key}</button>))
         } else if (i == 2) {
           row3.forEach((key, j) => {
             if (key == "enter") {
-              temp.push(<button key={`${i}_${j}`} className="uppercase rounded-lg md:text-md text-sm font-semibold bg-gray-400 md:w-24 w-16 h-24" onClick={handleEnter} value={key}>{key}</button>)
+              temp.push(<button key={`${i}_${j}`} className="uppercase rounded-lg md:text-md text-sm font-semibold bg-gray-400 w-full h-24" onClick={handleEnter} value={key}>{key}</button>)
             } else if (key == "delete") {
-              temp.push(<button key={`${i}_${j}`} className="uppercase rounded-lg md:text-md text-sm font-semibold bg-gray-400 md:w-24 w-16 h-24" onClick={handleDelete} value={key}>{key}</button>)
+              temp.push(<button key={`${i}_${j}`} className="uppercase rounded-lg md:text-md text-sm font-semibold bg-gray-400 w-full h-24" onClick={handleDelete} value={key}>{key}</button>)
             } else {
-              temp.push(<button key={`${i}_${j}`} className={`uppercase rounded-lg md:text-3xl text-xl font-semibold ${letterStatus[key]} md:w-16 w-12 h-24`} onClick={handleClick} value={key}>{key}</button>)
+              temp.push(<button key={`${i}_${j}`} className={`uppercase rounded-lg md:text-3xl text-2xl font-semibold ${letterStatus[key]} w-full h-24`} onClick={handleClick} value={key}>{key}</button>)
             }
           })
         }
-        keyboard.push(<div key={`${i}`} className="flex w-full dark:text-white text-black justify-center md:space-x-2 space-x-1 md:mb-1 md:mt-1 md:mx-1 mb-1.5">{temp}</div>)
+        keyboard.push(<div key={`${i}`} className={`flex w-screen dark:text-white text-black ${i == 1 ? "px-4" : "px-1"} justify-center md:space-x-2 space-x-1 md:mb-1 md:mt-1 md:mx-1 mb-1.5`}>{temp}</div>)
       }
     return keyboard
   }
