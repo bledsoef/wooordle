@@ -20,7 +20,7 @@ export default function Home() {
     setPlay(true)
   }
   return (
-    <main className="h-screen items-center w-full pt-20 bg-neutral-900">
+    <main className="h-screen items-center w-full md:pt-20 pt-10 bg-neutral-900">
       <Navbar guesses={guessesCount} play={play}/>
       {!play && <LandingPage onPlay={handlePlay}/>}
       {!(showModal || guessesCount == 10) && play && <Wordle onEnter={handleEnter} onCorrect={handleCorrect} wordOfDay={"viscerally"}/>}
