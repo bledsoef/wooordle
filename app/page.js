@@ -13,7 +13,7 @@ export default function Home() {
   }
   return (
     <main className="min-h-screen items-center p-24 bg-neutral-900">
-      {!showModal && <Wordle onEnter={handleEnter} onCorrect={handleCorrect} wordOfDay={"carts"}/>}
+      {!showModal && <Wordle onEnter={handleEnter} onCorrect={handleCorrect} wordOfDay={"clinically"}/>}
       {showModal && <Modal guesses={guessesCount}/>}
     </main>
   );

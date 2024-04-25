@@ -22,6 +22,9 @@ module.exports = {
         yellow: {
           450: "#B59F3B"
         }
+      },
+      margin: {
+        "1.5": "0.4rem"
       }
     },
   },
