@@ -224,12 +224,13 @@ export default function Wordle({onEnter, onCorrect, wordOfDay}) {
       for (let j = 0; j < guesses[i].length; j++) {
         row.push(<div key={`${i}_${j}`} className={`
           flex ${guesses[i].length == word.length && currentRow != i ? "underline" : ""} 
+          dark:text-white text-white
           justify-center ${guesses[i][j][0] ? "border-gray-400" : "border-gray-500"} 
-          ${currentRow == i ? "md:h-28 h-14" : "h-full"} 
+          ${currentRow == i ? "md:h-28 h-14" : "h-6"} 
           ${i < currentRow ? "" : "md:border-3 border-2"} 
           ${guesses[i].length < 6 ? `md:w-28 w-14 ${currentRow == i ? "md:text-5xl text-2xl" : "md:text-xl text-lg"}` : 
           (guesses[i].length < 8 ? `md:w-16 w-10 ${currentRow == i ? "md:text-4xl text-lg" : "md:text-lg text-md"}` : 
-          (guesses[i].length < 10 ? `md:w-12 w-8 ${currentRow == i ? "md:text-4xl text-lg" : "md:text-lg text-md"}` : `md:w-12 w-5 ${currentRow == i ? "md:text-4xl text-lg" : "md:text-lg text-md"}`))} 
+          (guesses[i].length < 10 ? `md:w-12 w-8 ${currentRow == i ? "md:text-4xl text-lg" : "md:text-lg text-md"}` : `md:w-12 w-6 ${currentRow == i ? "md:text-4xl text-lg" : "md:text-lg text-md"}`))} 
           ${guesses[i][j][1]} font-semibold uppercase justify-center items-center 
         `}>{guesses[i][j][0]}</div>)
       }
@@ -265,7 +266,8 @@ export default function Wordle({onEnter, onCorrect, wordOfDay}) {
             }
           })
         }
-        keyboard.push(<div key={`${i}`} className={`flex w-screen h-full dark:text-white text-black ${i == 1 ? "px-6" : "px-1"} justify-center md:space-x-2 space-x-1 md:mb-1 md:mt-1 md:mx-1 mb-1.5`}>{temp}</div>)
+        keyboard.push(<div key={`${i}`} className={`flex w-screen h-full dark:text-white text-white 
+          ${i == 1 ? "px-6" : "px-1"} justify-center md:space-x-2 space-x-1 md:mb-1 md:mt-1 md:mx-1 mb-1.5`}>{temp}</div>)
       }
     return keyboard
   }
@@ -275,7 +277,7 @@ export default function Wordle({onEnter, onCorrect, wordOfDay}) {
     <div className="flex flex-col items-center pt-6 h-full w-full">
       {message && <div className="text-3xl uppercase font-bold">{message}</div>}
       <div className="md:mb-24 mb-8 flex flex-col h-full">{rows}</div>
-      <div className="bottom-0 items-center flex flex-col h-1/2 mb-3 w-full">{keyboard}</div>
+      <div className="bottom-0 items-center flex flex-col h-full mb-3 w-full">{keyboard}</div>
     </div>
   );
 }
