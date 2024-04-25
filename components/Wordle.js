@@ -245,21 +245,27 @@ export default function Wordle({onEnter, onCorrect, wordOfDay}) {
     for (let i = 0; i < 3; i++) {
         let temp = []
         if (i == 0) {
-          row1.forEach((key, j) => temp.push(<button key={`${i}_${j}`} className={`uppercase rounded-lg md:text-3xl text-2xl font-semibold ${letterStatus[key]} w-full h-24`} onClick={handleClick} value={key}>{key}</button>))
+          row1.forEach((key, j) => temp.push(<button key={`${i}_${j}`} className={`
+            uppercase rounded-lg md:text-3xl text-2xl font-semibold ${letterStatus[key]} w-full h-full
+          `} onClick={handleClick} value={key}>{key}</button>))
         } else if (i == 1) {
-          row2.forEach((key, j) => temp.push(<button key={`${i}_${j}`} className={`uppercase rounded-lg md:text-3xl text-2xl font-semibold ${letterStatus[key]} w-full h-24`} onClick={handleClick} value={key}>{key}</button>))
+          row2.forEach((key, j) => temp.push(<button key={`${i}_${j}`} className={`
+            uppercase rounded-lg md:text-3xl text-2xl font-semibold ${letterStatus[key]} w-full h-full
+          `} onClick={handleClick} value={key}>{key}</button>))
         } else if (i == 2) {
           row3.forEach((key, j) => {
             if (key == "enter") {
-              temp.push(<button key={`${i}_${j}`} className="uppercase rounded-lg md:text-lg text-md font-semibold bg-gray-400 w-full h-24" onClick={handleEnter} value={key}>{key}</button>)
+              temp.push(<button key={`${i}_${j}`} className="uppercase rounded-lg md:text-lg text-md font-semibold bg-gray-400 w-full h-full" onClick={handleEnter} value={key}>{key}</button>)
             } else if (key == "delete") {
-              temp.push(<button key={`${i}_${j}`} className="uppercase rounded-lg md:text-lg text-md font-semibold bg-gray-400 w-full h-24" onClick={handleDelete} value={key}>{key}</button>)
+              temp.push(<button key={`${i}_${j}`} className="uppercase rounded-lg md:text-lg text-md font-semibold bg-gray-400 w-full h-full" onClick={handleDelete} value={key}>{key}</button>)
             } else {
-              temp.push(<button key={`${i}_${j}`} className={`uppercase rounded-lg md:text-3xl text-2xl font-semibold ${letterStatus[key]} w-full h-24`} onClick={handleClick} value={key}>{key}</button>)
+              temp.push(<button key={`${i}_${j}`} className={`
+                uppercase rounded-lg md:text-3xl text-2xl font-semibold ${letterStatus[key]} w-full h-full
+              `} onClick={handleClick} value={key}>{key}</button>)
             }
           })
         }
-        keyboard.push(<div key={`${i}`} className={`flex w-screen dark:text-white text-black ${i == 1 ? "px-6" : "px-1"} justify-center md:space-x-2 space-x-1 md:mb-1 md:mt-1 md:mx-1 mb-1.5`}>{temp}</div>)
+        keyboard.push(<div key={`${i}`} className={`flex w-screen h-full dark:text-white text-black ${i == 1 ? "px-6" : "px-1"} justify-center md:space-x-2 space-x-1 md:mb-1 md:mt-1 md:mx-1 mb-1.5`}>{temp}</div>)
       }
     return keyboard
   }
@@ -269,7 +275,7 @@ export default function Wordle({onEnter, onCorrect, wordOfDay}) {
     <div className="flex flex-col items-center pt-6 h-full w-full">
       {message && <div className="text-3xl uppercase font-bold">{message}</div>}
       <div className="md:mb-24 mb-8 flex flex-col h-full">{rows}</div>
-      <div className="bottom-0 items-center flex flex-col mb-3 w-full">{keyboard}</div>
+      <div className="bottom-0 items-center flex flex-col h-1/2 mb-3 w-full">{keyboard}</div>
     </div>
   );
 }

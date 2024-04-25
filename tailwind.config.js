@@ -19,9 +19,9 @@ module.exports = {
           450: "#B59F3B"
         }
       },
-      // margin: {
-      //   "1.5": "0.4rem"
-      // }
+      height: {
+        "18": "4.5rem"
+      }
     },
   },
   plugins: [],
