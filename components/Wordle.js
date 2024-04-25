@@ -257,7 +257,7 @@ export default function Wordle({onEnter, onCorrect, wordOfDay}) {
   let keyboard = initializeKeyboard()
   let rows = initalizeGrid()
   return (
-    <div className="flex flex-col items-center pt-20 h-full w-full">
+    <div className="flex flex-col items-center h-full w-full">
       {message && <div className="text-3xl uppercase font-bold">{message}</div>}
       <div className="mb-24 flex flex-col h-full">{rows}</div>
       <div className="bottom-0 items-center flex flex-col mb-3 w-full">{keyboard}</div>
