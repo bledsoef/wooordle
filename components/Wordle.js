@@ -16,7 +16,9 @@ export default function Wordle({onEnter, onCorrect, wordOfDay}) {
     for (let i = 0; i < gridHeight; i++) {
       let row = []
       for (let j = 0; j < guesses[i].length; j++) {
-        row.push(<div key={`${i}_${j}`} className={`flex ${guesses[i][j][0] ? "border-gray-400" : "border-gray-500"} ${i < currentRow ? "" : "border-3"} w-20 h-${guesses[i][j][2] ? guesses[i][j][2] : "20" } text-${guesses[i][j][3] ? "4xl" : guesses[i][j][3]}  ${guesses[i][j][1]} font-semibold uppercase justify-center items-center`}>{guesses[i][j][0]}</div>)
+        console.log(currentRow)
+        console.log(i)
+        row.push(<div key={`${i}_${j}`} className={`flex ${guesses[i][j][0] ? "border-gray-400" : "border-gray-500"} ${i < currentRow ? "" : "md:border-3 border-2"} md:w-20 w-14 ${currentRow == i ? "md:h-20 h-14 md:text-4xl text-3xl" : "md:h-6 h-5 md:text-xl text-lg"}  ${guesses[i][j][1]} font-semibold uppercase justify-center items-center`}>{guesses[i][j][0]}</div>)
       }
       rows.push(<div key={i} className="flex space-x-2 mb-2">{row}</div>)
     }
@@ -28,7 +30,6 @@ export default function Wordle({onEnter, onCorrect, wordOfDay}) {
       handleOnCorrect();
     }
   }, [correct]);
-
   useEffect(() => {
     const keyDownHandler = (e) => {
         if (validKeys.includes(e.key)) {
