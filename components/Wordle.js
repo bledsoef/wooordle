@@ -222,9 +222,9 @@ export default function Wordle({onEnter, onCorrect, wordOfDay}) {
     for (let i = 0; i < gridHeight; i++) {
       let row = []
       for (let j = 0; j < guesses[i].length; j++) {
-        row.push(<div key={`${i}_${j}`} className={`flex ${guesses[i].length == word.length && currentRow != i ? "underline" : ""} justify-center ${guesses[i][j][0] ? "border-gray-400" : "border-gray-500"} ${i < currentRow ? "" : "md:border-3 border-2"} ${guesses[i].length < 7 ? "md:w-28 w-24" : "md:w-16 w-12"} ${currentRow == i ? "md:h-28 h-24 md:text-5xl text-3xl" : "md:h-6 h-6 md:text-xl text-lg"}  ${guesses[i][j][1]} font-semibold uppercase justify-center items-center`}>{guesses[i][j][0]}</div>)
+        row.push(<div key={`${i}_${j}`} className={`flex ${guesses[i].length == word.length && currentRow != i ? "underline" : ""} justify-center ${guesses[i][j][0] ? "border-gray-400" : "border-gray-500"} ${i < currentRow ? "" : "md:border-3 border-2"} ${guesses[i].length < 7 ? "md:w-28 w-24" : "md:w-16 w-12"} ${currentRow == i ? "md:h-28 h-24 md:text-5xl text-3xl" : "h-full md:text-xl text-lg"}  ${guesses[i][j][1]} font-semibold uppercase justify-center items-center`}>{guesses[i][j][0]}</div>)
       }
-      rows.push(<div key={i} className="flex justify-center space-x-2 mb-2">{row}</div>)
+      rows.push(<div key={i} className="flex justify-center space-x-2 mb-2 h-full">{row}</div>)
     }
     return rows
   }
@@ -242,25 +242,25 @@ export default function Wordle({onEnter, onCorrect, wordOfDay}) {
         } else if (i == 2) {
           row3.forEach((key, j) => {
             if (key == "enter") {
-              temp.push(<button key={`${i}_${j}`} className="uppercase rounded-lg md:text-md text-sm font-semibold bg-gray-400 w-full h-24" onClick={handleEnter} value={key}>{key}</button>)
+              temp.push(<button key={`${i}_${j}`} className="uppercase rounded-lg md:text-lg text-md font-semibold bg-gray-400 w-full h-24" onClick={handleEnter} value={key}>{key}</button>)
             } else if (key == "delete") {
-              temp.push(<button key={`${i}_${j}`} className="uppercase rounded-lg md:text-md text-sm font-semibold bg-gray-400 w-full h-24" onClick={handleDelete} value={key}>{key}</button>)
+              temp.push(<button key={`${i}_${j}`} className="uppercase rounded-lg md:text-lg text-md font-semibold bg-gray-400 w-full h-24" onClick={handleDelete} value={key}>{key}</button>)
             } else {
               temp.push(<button key={`${i}_${j}`} className={`uppercase rounded-lg md:text-3xl text-2xl font-semibold ${letterStatus[key]} w-full h-24`} onClick={handleClick} value={key}>{key}</button>)
             }
           })
         }
-        keyboard.push(<div key={`${i}`} className={`flex w-screen dark:text-white text-black ${i == 1 ? "px-4" : "px-1"} justify-center md:space-x-2 space-x-1 md:mb-1 md:mt-1 md:mx-1 mb-1.5`}>{temp}</div>)
+        keyboard.push(<div key={`${i}`} className={`flex w-screen dark:text-white text-black ${i == 1 ? "px-6" : "px-1"} justify-center md:space-x-2 space-x-1 md:mb-1 md:mt-1 md:mx-1 mb-1.5`}>{temp}</div>)
       }
     return keyboard
   }
   let keyboard = initializeKeyboard()
   let rows = initalizeGrid()
   return (
-    <div className="flex flex-col items-center w-full">
+    <div className="flex flex-col items-center h-screen w-full">
       {message && <div className="text-3xl uppercase font-bold">{message}</div>}
-      <div className="mb-12 flex flex-col">{rows}</div>
-      <div className="fixed bottom-0 items-center flex flex-col mb-3 w-full">{keyboard}</div>
+      <div className="mb-12 flex flex-col h-full">{rows}</div>
+      <div className="bottom-0 items-center flex flex-col mb-3 w-full">{keyboard}</div>
     </div>
   );
 }
