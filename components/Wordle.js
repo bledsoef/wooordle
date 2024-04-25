@@ -222,7 +222,7 @@ export default function Wordle({onEnter, onCorrect, wordOfDay}) {
     for (let i = 0; i < gridHeight; i++) {
       let row = []
       for (let j = 0; j < guesses[i].length; j++) {
-        row.push(<div key={`${i}_${j}`} className={`flex ${guesses[i].length == word.length && currentRow != i ? "underline" : ""} justify-center ${guesses[i][j][0] ? "border-gray-400" : "border-gray-500"} ${i < currentRow ? "" : "md:border-3 border-2"} ${guesses[i].length < 7 ? "md:w-28 w-24" : "md:w-16 w-12"} ${currentRow == i ? "md:h-28 h-24 md:text-5xl text-3xl" : "h-full md:text-xl text-lg"}  ${guesses[i][j][1]} font-semibold uppercase justify-center items-center`}>{guesses[i][j][0]}</div>)
+        row.push(<div key={`${i}_${j}`} className={`flex ${guesses[i].length == word.length && currentRow != i ? "underline" : ""} justify-center ${guesses[i][j][0] ? "border-gray-400" : "border-gray-500"} ${i < currentRow ? "" : "md:border-3 border-2"} ${guesses[i].length < 7 ? "md:w-28 w-24" : (guess[i].length < 12  ? "md:w-16 w-12" : "w-12")} ${currentRow == i ? "md:h-28 h-24 md:text-5xl text-3xl" : "h-full md:text-xl text-lg"}  ${guesses[i][j][1]} font-semibold uppercase justify-center items-center`}>{guesses[i][j][0]}</div>)
       }
       rows.push(<div key={i} className="flex justify-center space-x-2 mb-2 h-full">{row}</div>)
     }
@@ -259,7 +259,7 @@ export default function Wordle({onEnter, onCorrect, wordOfDay}) {
   return (
     <div className="flex flex-col items-center pt-20 h-full w-full">
       {message && <div className="text-3xl uppercase font-bold">{message}</div>}
-      <div className="mb-12 flex flex-col h-full">{rows}</div>
+      <div className="mb-24 flex flex-col h-full">{rows}</div>
       <div className="bottom-0 items-center flex flex-col mb-3 w-full">{keyboard}</div>
     </div>
   );
