@@ -277,7 +277,7 @@ export default function Wordle({onEnter, onCorrect, wordOfDay}) {
     <div className="flex flex-col items-center justify-between pt-6 h-full w-full">
       {message && <div className="text-3xl uppercase font-bold">{message}</div>}
       <div className="md:mb-24 mb-4 flex flex-col">{rows}</div>
-      <div className="items-center flex flex-col w-full">{keyboard}</div>
+      <div className="bottom-0 items-center flex flex-col w-full">{keyboard}</div>
     </div>
   );
 }
