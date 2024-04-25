@@ -247,21 +247,21 @@ export default function Wordle({onEnter, onCorrect, wordOfDay}) {
         let temp = []
         if (i == 0) {
           row1.forEach((key, j) => temp.push(<button key={`${i}_${j}`} className={`
-            uppercase rounded-lg md:text-3xl text-2xl font-semibold ${letterStatus[key]} w-full h-full
+            uppercase rounded-lg md:text-3xl text-2xl font-semibold ${letterStatus[key]} w-full  h-18
           `} onClick={handleClick} value={key}>{key}</button>))
         } else if (i == 1) {
           row2.forEach((key, j) => temp.push(<button key={`${i}_${j}`} className={`
-            uppercase rounded-lg md:text-3xl text-2xl font-semibold ${letterStatus[key]} w-full h-full
+            uppercase rounded-lg md:text-3xl text-2xl font-semibold ${letterStatus[key]} w-full  h-18
           `} onClick={handleClick} value={key}>{key}</button>))
         } else if (i == 2) {
           row3.forEach((key, j) => {
             if (key == "enter") {
-              temp.push(<button key={`${i}_${j}`} className="uppercase rounded-lg md:text-lg text-md font-semibold bg-gray-400 w-full h-full" onClick={handleEnter} value={key}>{key}</button>)
+              temp.push(<button key={`${i}_${j}`} className="uppercase rounded-lg md:text-lg text-md font-semibold bg-gray-400 w-full h-18" onClick={handleEnter} value={key}>{key}</button>)
             } else if (key == "delete") {
-              temp.push(<button key={`${i}_${j}`} className="uppercase rounded-lg md:text-lg text-md font-semibold bg-gray-400 w-full h-full" onClick={handleDelete} value={key}>{key}</button>)
+              temp.push(<button key={`${i}_${j}`} className="uppercase rounded-lg md:text-lg text-md font-semibold bg-gray-400 w-full h-18" onClick={handleDelete} value={key}>{key}</button>)
             } else {
               temp.push(<button key={`${i}_${j}`} className={`
-                uppercase rounded-lg md:text-3xl text-2xl font-semibold ${letterStatus[key]} w-full h-full
+                uppercase rounded-lg md:text-3xl text-2xl font-semibold ${letterStatus[key]} w-full h-18
               `} onClick={handleClick} value={key}>{key}</button>)
             }
           })
@@ -274,10 +274,10 @@ export default function Wordle({onEnter, onCorrect, wordOfDay}) {
   let keyboard = initializeKeyboard()
   let rows = initalizeGrid()
   return (
-    <div className="flex flex-col items-center pt-6 h-full w-full">
+    <div className="flex flex-col items-center justify-between pt-6 h-full w-full">
       {message && <div className="text-3xl uppercase font-bold">{message}</div>}
-      <div className="md:mb-24 mb-8 flex flex-col h-full">{rows}</div>
-      <div className="md:mb-0 mb-20 items-center flex flex-col h-full w-full">{keyboard}</div>
+      <div className="md:mb-24 mb-4 flex flex-col">{rows}</div>
+      <div className="items-center flex flex-col w-full">{keyboard}</div>
     </div>
   );
 }
