@@ -18,15 +18,9 @@ export default function Wordle({onEnter, onCorrect, wordOfDay}) {
     [["", ""], ["", ""], ["", ""], ["", ""], ["", ""]],
     [["", ""], ["", ""], ["", ""], ["", ""], ["", ""]],
     [["", ""], ["", ""], ["", ""], ["", ""], ["", ""]],
-    [["", ""], ["", ""], ["", ""], ["", ""], ["", ""]],
-    [["", ""], ["", ""], ["", ""], ["", ""], ["", ""]],
-    [["", ""], ["", ""], ["", ""], ["", ""], ["", ""]],
-    [["", ""], ["", ""], ["", ""], ["", ""], ["", ""]],
-    [["", ""], ["", ""], ["", ""], ["", ""], ["", ""]],
-    [["", ""], ["", ""], ["", ""], ["", ""], ["", ""]],
-    [["", ""], ["", ""], ["", ""], ["", ""], ["", ""]],
+
   ])
-  let gridHeight = 16
+  let gridHeight = 10
 
   const validKeys = ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "a", "s", "d", "f", "g", "h", "j", "k", "l", "Enter", "z", "x", "c", "v", "b", "n", "m", "Backspace"]  
   useEffect(() => {
@@ -111,7 +105,7 @@ export default function Wordle({onEnter, onCorrect, wordOfDay}) {
         }
     }
     for (let i = 0; i < guess.length; i++) {
-        if (word.includes(guess[i][0]) && guessCharacterCount[guess[i][0]] < wordCharacterCount[guess[i][0]]) {
+        if (word.includes(guess[i][0]) && result[i][1] != "bg-green-450" && guessCharacterCount[guess[i][0]] < wordCharacterCount[guess[i][0]]) {
             result[i][1] = "bg-yellow-450"
             guessCharacterCount[guess[i]] += 1
         }
@@ -207,6 +201,7 @@ export default function Wordle({onEnter, onCorrect, wordOfDay}) {
               setCurrentRow(currentRow + 1)
               setGuessIndex(0)
               setRowLength(5)
+              onEnter()
         }
         
     } else {
@@ -218,11 +213,9 @@ export default function Wordle({onEnter, onCorrect, wordOfDay}) {
     for (let i = 0; i < gridHeight; i++) {
       let row = []
       for (let j = 0; j < guesses[i].length; j++) {
-        console.log(currentRow)
-        console.log(i)
-        row.push(<div key={`${i}_${j}`} className={`flex ${guesses[i][j][0] ? "border-gray-400" : "border-gray-500"} ${i < currentRow ? "" : "md:border-3 border-2"} md:w-24 w-18 ${currentRow == i ? "md:h-24 h-18 md:text-5xl text-3xl" : "md:h-6 h-5 md:text-xl text-lg"}  ${guesses[i][j][1]} font-semibold uppercase justify-center items-center`}>{guesses[i][j][0]}</div>)
+        row.push(<div key={`${i}_${j}`} className={`flex justify-center ${guesses[i][j][0] ? "border-gray-400" : "border-gray-500"} ${i < currentRow ? "" : "md:border-3 border-2"} md:w-24 w-18 ${currentRow == i ? "md:h-24 h-18 md:text-5xl text-3xl" : "md:h-6 h-6 md:text-xl text-lg"}  ${guesses[i][j][1]} font-semibold uppercase justify-center items-center`}>{guesses[i][j][0]}</div>)
       }
-      rows.push(<div key={i} className="flex space-x-2 mb-2">{row}</div>)
+      rows.push(<div key={i} className="flex justify-center space-x-2 mb-2">{row}</div>)
     }
     return rows
   }
@@ -234,9 +227,9 @@ export default function Wordle({onEnter, onCorrect, wordOfDay}) {
     for (let i = 0; i < 3; i++) {
         let temp = []
         if (i == 0) {
-          row1.forEach((key, j) => temp.push(<button key={`${i}_${j}`} className="uppercase rounded-lg md:text-2xl text-xl font-semibold bg-gray-400 md:w-14 w-9 h-20" onClick={handleClick} value={key}>{key}</button>))
+          row1.forEach((key, j) => temp.push(<button key={`${i}_${j}`} className="uppercase rounded-lg md:text-2xl text-xl font-semibold bg-gray-400 md:w-16 w-12 h-20" onClick={handleClick} value={key}>{key}</button>))
         } else if (i == 1) {
-          row2.forEach((key, j) => temp.push(<button key={`${i}_${j}`} className="uppercase rounded-lg md:text-2xl text-xl font-semibold bg-gray-400 md:w-14 w-9 h-20" onClick={handleClick} value={key}>{key}</button>))
+          row2.forEach((key, j) => temp.push(<button key={`${i}_${j}`} className="uppercase rounded-lg md:text-2xl text-xl font-semibold bg-gray-400 md:w-16 w-12 h-20" onClick={handleClick} value={key}>{key}</button>))
         } else if (i == 2) {
           row3.forEach((key, j) => {
             if (key == "enter") {
@@ -244,7 +237,7 @@ export default function Wordle({onEnter, onCorrect, wordOfDay}) {
             } else if (key == "delete") {
               temp.push(<button key={`${i}_${j}`} className="uppercase rounded-lg md:text-md text-sm font-semibold bg-gray-400 md:w-24 w-16 h-20" onClick={handleDelete} value={key}>{key}</button>)
             } else {
-              temp.push(<button key={`${i}_${j}`} className="uppercase rounded-lg md:text-2xl text-xl font-semibold bg-gray-400 md:w-14 w-9 md:h-20" onClick={handleClick} value={key}>{key}</button>)
+              temp.push(<button key={`${i}_${j}`} className="uppercase rounded-lg md:text-2xl text-xl font-semibold bg-gray-400 md:w-16 w-12 md:h-20" onClick={handleClick} value={key}>{key}</button>)
             }
           })
         }
@@ -258,7 +251,7 @@ export default function Wordle({onEnter, onCorrect, wordOfDay}) {
     <div className="flex flex-col items-center w-full">
       {message && <div>{message}</div>}
       <div className="mb-12 flex flex-col">{rows}</div>
-      <div className="fixed bottom-4 items-center flex flex-col mb-20 md:w-1/3 w-full">{keyboard}</div>
+      <div className="fixed bottom-4 items-center flex flex-col mb-20 w-full">{keyboard}</div>
     </div>
   );
 }
