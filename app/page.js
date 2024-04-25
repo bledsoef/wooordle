@@ -15,7 +15,7 @@ export default function Home() {
   return (
     <main className="min-h-screen items-center w-full pt-24 bg-neutral-900">
       <Navbar guesses={guessesCount}/>
-      {!showModal && <Wordle onEnter={handleEnter} onCorrect={handleCorrect} wordOfDay={"clinically"}/>}
+      {!showModal && <Wordle onEnter={handleEnter} onCorrect={handleCorrect} wordOfDay={"equivocal"}/>}
       {showModal && <Modal guesses={guessesCount}/>}
     </main>
   );
