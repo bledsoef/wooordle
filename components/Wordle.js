@@ -249,9 +249,9 @@ export default function Wordle({onEnter, onCorrect, wordOfDay}) {
   let rows = initalizeGrid()
   return (
     <div className="flex flex-col items-center w-full">
-      {message && <div>{message}</div>}
+      {message && <div className="text-3xl uppercase font-bold">{message}</div>}
       <div className="mb-12 flex flex-col">{rows}</div>
-      <div className="fixed bottom-4 items-center flex flex-col mb-20 w-full">{keyboard}</div>
+      <div className="fixed bottom-0 items-center flex flex-col mb-3 w-full">{keyboard}</div>
     </div>
   );
 }
