@@ -107,7 +107,7 @@ export default function Wordle({onEnter, onCorrect, wordOfDay}) {
     for (let i = 0; i < guess.length; i++) {
         if (word.includes(guess[i][0]) && result[i][1] != "bg-green-450" && guessCharacterCount[guess[i][0]] < wordCharacterCount[guess[i][0]]) {
             result[i][1] = "bg-yellow-450"
-            guessCharacterCount[guess[i]] += 1
+            guessCharacterCount[guess[i][0]] += 1
         }
     }
     return result
@@ -213,7 +213,7 @@ export default function Wordle({onEnter, onCorrect, wordOfDay}) {
     for (let i = 0; i < gridHeight; i++) {
       let row = []
       for (let j = 0; j < guesses[i].length; j++) {
-        row.push(<div key={`${i}_${j}`} className={`flex justify-center ${guesses[i][j][0] ? "border-gray-400" : "border-gray-500"} ${i < currentRow ? "" : "md:border-3 border-2"} md:w-20 w-16 ${currentRow == i ? "md:h-20 h-16 md:text-5xl text-3xl" : "md:h-6 h-6 md:text-xl text-lg"}  ${guesses[i][j][1]} font-semibold uppercase justify-center items-center`}>{guesses[i][j][0]}</div>)
+        row.push(<div key={`${i}_${j}`} className={`flex ${guesses[i].length == word.length && currentRow != i ? "underline" : ""} justify-center ${guesses[i][j][0] ? "border-gray-400" : "border-gray-500"} ${i < currentRow ? "" : "md:border-3 border-2"} md:w-20 w-16 ${currentRow == i ? "md:h-20 h-16 md:text-5xl text-3xl" : "md:h-6 h-6 md:text-xl text-lg"}  ${guesses[i][j][1]} font-semibold uppercase justify-center items-center`}>{guesses[i][j][0]}</div>)
       }
       rows.push(<div key={i} className="flex justify-center space-x-2 mb-2">{row}</div>)
     }
@@ -241,7 +241,7 @@ export default function Wordle({onEnter, onCorrect, wordOfDay}) {
             }
           })
         }
-        keyboard.push(<div key={`${i}`} className="flex w-full justify-center md:space-x-2 space-x-1 md:mb-1 md:mt-1 md:mx-1 mb-1.5">{temp}</div>)
+        keyboard.push(<div key={`${i}`} className="flex w-full text-white justify-center md:space-x-2 space-x-1 md:mb-1 md:mt-1 md:mx-1 mb-1.5">{temp}</div>)
       }
     return keyboard
   }
