@@ -20,6 +20,7 @@ export default function Wordle({onEnter, onCorrect, wordOfDay}) {
     [["", ""], ["", ""], ["", ""], ["", ""], ["", ""]],
 
   ])
+  const [letterStatus, setLetterStatus] = useState({"q":"bg-gray-400", "w":"bg-gray-400", "e":"bg-gray-400", "r":"bg-gray-400", "t":"bg-gray-400", "y":"bg-gray-400", "u":"bg-gray-400", "i":"bg-gray-400", "o":"bg-gray-400", "p":"bg-gray-400", "a":"bg-gray-400", "s":"bg-gray-400", "d":"bg-gray-400", "f":"bg-gray-400", "g":"bg-gray-400", "h":"bg-gray-400", "j":"bg-gray-400", "k":"bg-gray-400", "l":"bg-gray-400", "z":"bg-gray-400", "x":"bg-gray-400", "c":"bg-gray-400", "v":"bg-gray-400", "b":"bg-gray-400", "n":"bg-gray-400", "m":"bg-gray-400"})
   let gridHeight = 10
 
   const validKeys = ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "a", "s", "d", "f", "g", "h", "j", "k", "l", "Enter", "z", "x", "c", "v", "b", "n", "m", "Backspace"]  
@@ -28,6 +29,7 @@ export default function Wordle({onEnter, onCorrect, wordOfDay}) {
       handleOnCorrect();
     }
   }, [correct]);
+
   useEffect(() => {
     const keyDownHandler = (e) => {
         if (validKeys.includes(e.key)) {
@@ -94,24 +96,31 @@ export default function Wordle({onEnter, onCorrect, wordOfDay}) {
     }
     let result = guess.map((character) => {
         character[1] = "bg-zinc-700"
-        character[2] = "6"
-        character[3] = "xl"
         return character
     })
     for (let i = 0; i < guess.length; i++) {
         if (i < word.length && guess[i][0] == word[i]) {
             result[i][1] = "bg-green-450"
+            setLetterStatus(prevLetterStatus => ({...prevLetterStatus, [guess[i][0]]: "bg-green-450"}))
             guessCharacterCount[guess[i][0]] += 1
         }
     }
     for (let i = 0; i < guess.length; i++) {
         if (word.includes(guess[i][0]) && result[i][1] != "bg-green-450" && guessCharacterCount[guess[i][0]] < wordCharacterCount[guess[i][0]]) {
             result[i][1] = "bg-yellow-450"
+            if (letterStatus[guess[i][0]] != "bg-green-450") {
+              setLetterStatus(prevLetterStatus => ({...prevLetterStatus, [guess[i][0]]: "bg-yellow-450"}))
+            }
             guessCharacterCount[guess[i][0]] += 1
         }
     }
+    for (let i = 0; i < guess.length; i++) {
+      if (!word.includes(guess[i][0])) {
+        setLetterStatus(prevLetterStatus => ({...prevLetterStatus, [guess[i][0]]: "bg-zinc-700"}))
+      }
+    }
     return result
-  }
+  } 
   const handleOnCorrect = () => {
     onCorrect()
   }
@@ -227,9 +236,9 @@ export default function Wordle({onEnter, onCorrect, wordOfDay}) {
     for (let i = 0; i < 3; i++) {
         let temp = []
         if (i == 0) {
-          row1.forEach((key, j) => temp.push(<button key={`${i}_${j}`} className="uppercase rounded-lg md:text-3xl text-xl font-semibold bg-gray-400 md:w-16 w-12 h-24" onClick={handleClick} value={key}>{key}</button>))
+          row1.forEach((key, j) => temp.push(<button key={`${i}_${j}`} className={`uppercase rounded-lg md:text-3xl text-xl font-semibold ${letterStatus[key]} md:w-16 w-12 h-24`} onClick={handleClick} value={key}>{key}</button>))
         } else if (i == 1) {
-          row2.forEach((key, j) => temp.push(<button key={`${i}_${j}`} className="uppercase rounded-lg md:text-3xl text-xl font-semibold bg-gray-400 md:w-16 w-12 h-24" onClick={handleClick} value={key}>{key}</button>))
+          row2.forEach((key, j) => temp.push(<button key={`${i}_${j}`} className={`uppercase rounded-lg md:text-3xl text-xl font-semibold ${letterStatus[key]} md:w-16 w-12 h-24`} onClick={handleClick} value={key}>{key}</button>))
         } else if (i == 2) {
           row3.forEach((key, j) => {
             if (key == "enter") {
@@ -237,7 +246,7 @@ export default function Wordle({onEnter, onCorrect, wordOfDay}) {
             } else if (key == "delete") {
               temp.push(<button key={`${i}_${j}`} className="uppercase rounded-lg md:text-md text-sm font-semibold bg-gray-400 md:w-24 w-16 h-24" onClick={handleDelete} value={key}>{key}</button>)
             } else {
-              temp.push(<button key={`${i}_${j}`} className="uppercase rounded-lg md:text-3xl text-xl font-semibold bg-gray-400 md:w-16 w-12 h-24" onClick={handleClick} value={key}>{key}</button>)
+              temp.push(<button key={`${i}_${j}`} className={`uppercase rounded-lg md:text-3xl text-xl font-semibold ${letterStatus[key]} md:w-16 w-12 h-24`} onClick={handleClick} value={key}>{key}</button>)
             }
           })
         }
