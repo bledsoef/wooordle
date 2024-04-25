@@ -6,24 +6,28 @@ export default function Wordle({onEnter, onCorrect, wordOfDay}) {
   const [currentRow, setCurrentRow] = useState(0)
   const [guessIndex, setGuessIndex] = useState(0)
   const [rowLength, setRowLength] = useState(5)
-  const [gridHeight, setGridHeight] = useState(1)
   const [message, setMessage] = useState(false)
-  const [guesses, setGuesses] = useState([[
-    ["", "", "20", "4xl"], ["", "", "20", "4xl"], ["", "", "20", "4xl"], ["", "", "20", "4xl"], ["", "", "20", "4xl"]
-  ]])
-  const initalizeGrid = () => {
-    const rows = []
-    for (let i = 0; i < gridHeight; i++) {
-      let row = []
-      for (let j = 0; j < guesses[i].length; j++) {
-        console.log(currentRow)
-        console.log(i)
-        row.push(<div key={`${i}_${j}`} className={`flex ${guesses[i][j][0] ? "border-gray-400" : "border-gray-500"} ${i < currentRow ? "" : "md:border-3 border-2"} md:w-20 w-14 ${currentRow == i ? "md:h-20 h-14 md:text-4xl text-3xl" : "md:h-6 h-5 md:text-xl text-lg"}  ${guesses[i][j][1]} font-semibold uppercase justify-center items-center`}>{guesses[i][j][0]}</div>)
-      }
-      rows.push(<div key={i} className="flex space-x-2 mb-2">{row}</div>)
-    }
-    return rows
-  }
+  const [guesses, setGuesses] = useState([
+    [["", ""], ["", ""], ["", ""], ["", ""], ["", ""]],
+    [["", ""], ["", ""], ["", ""], ["", ""], ["", ""]],
+    [["", ""], ["", ""], ["", ""], ["", ""], ["", ""]],
+    [["", ""], ["", ""], ["", ""], ["", ""], ["", ""]],
+    [["", ""], ["", ""], ["", ""], ["", ""], ["", ""]],
+    [["", ""], ["", ""], ["", ""], ["", ""], ["", ""]],
+    [["", ""], ["", ""], ["", ""], ["", ""], ["", ""]],
+    [["", ""], ["", ""], ["", ""], ["", ""], ["", ""]],
+    [["", ""], ["", ""], ["", ""], ["", ""], ["", ""]],
+    [["", ""], ["", ""], ["", ""], ["", ""], ["", ""]],
+    [["", ""], ["", ""], ["", ""], ["", ""], ["", ""]],
+    [["", ""], ["", ""], ["", ""], ["", ""], ["", ""]],
+    [["", ""], ["", ""], ["", ""], ["", ""], ["", ""]],
+    [["", ""], ["", ""], ["", ""], ["", ""], ["", ""]],
+    [["", ""], ["", ""], ["", ""], ["", ""], ["", ""]],
+    [["", ""], ["", ""], ["", ""], ["", ""], ["", ""]],
+    [["", ""], ["", ""], ["", ""], ["", ""], ["", ""]],
+  ])
+  let gridHeight = 16
+
   const validKeys = ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "a", "s", "d", "f", "g", "h", "j", "k", "l", "Enter", "z", "x", "c", "v", "b", "n", "m", "Backspace"]  
   useEffect(() => {
     if (correct) {
@@ -43,8 +47,6 @@ export default function Wordle({onEnter, onCorrect, wordOfDay}) {
                     if (currentRow == index) {
                       guess[guessIndex][0] = e.key
                       guess[guessIndex][1] = ""
-                      guess[guessIndex][2] = "20"
-                      guess[guessIndex][3] = "4xl"
                       return guess
                     } else {
                       return guess
@@ -57,7 +59,7 @@ export default function Wordle({onEnter, onCorrect, wordOfDay}) {
                 setGuesses(prevGuesses => {
                   return prevGuesses.map((guess, index) => {
                     if (currentRow == index) {
-                      return [...guess, [e.key, "", "20", "4xl"]]
+                      return [...guess, [e.key, ""]]
                     } else {
                       return guess
                     }
@@ -132,8 +134,6 @@ export default function Wordle({onEnter, onCorrect, wordOfDay}) {
           if (currentRow == index) {
             guess[guessIndex][0] = e.target.value
             guess[guessIndex][1] = ""
-            guess[guessIndex][2] = "20"
-            guess[guessIndex][3] = "4xl"
             return guess
           } else {
             return guess
@@ -145,7 +145,7 @@ export default function Wordle({onEnter, onCorrect, wordOfDay}) {
       setGuesses(prevGuesses => {
         return prevGuesses.map((guess, index) => {
           if (currentRow == index) {
-            return [...guess, [e.target.value, "", "20", "4xl"]]
+            return [...guess, [e.target.value, ""]]
           } else {
             return guess
           }
@@ -161,7 +161,7 @@ export default function Wordle({onEnter, onCorrect, wordOfDay}) {
         setGuesses(prevGuesses => {
           return prevGuesses.map((guess, index) => {
             if (currentRow == index) {
-              guess[guessIndex-1] = ["", "", "20", "4xl"]
+              guess[guessIndex-1] = ["", ""]
               return guess
             } else {
               return guess
@@ -193,16 +193,8 @@ export default function Wordle({onEnter, onCorrect, wordOfDay}) {
             setGuesses(prevGuesses => {
                 return prevGuesses.map((guess, index) => {
                   if (currentRow == index) {
-                    for (let i = 0; i < res.length; i++) {
-                        res[i][2] = "6"
-                        res[i][3] = "xl"
-                    }
                     return res
                   } else {
-                    for (let i = 0; i < guess.length; i++) {
-                        guess[i][2] = "6"
-                        guess[i][3] = "xl"
-                    }
                     return guess
                   }
                 })
@@ -215,13 +207,24 @@ export default function Wordle({onEnter, onCorrect, wordOfDay}) {
               setCurrentRow(currentRow + 1)
               setGuessIndex(0)
               setRowLength(5)
-              setGridHeight(gridHeight+1)
-              setGuesses([...guesses, [["", "", "20", "4xl"], ["", "", "20", "4xl"], ["", "", "20", "4xl"], ["", "", "20", "4xl"], ["", "", "20", "4xl"]]])
         }
         
     } else {
         handleSetMessage("Not enough characters.")
     }
+  }
+  const initalizeGrid = () => {
+    const rows = []
+    for (let i = 0; i < gridHeight; i++) {
+      let row = []
+      for (let j = 0; j < guesses[i].length; j++) {
+        console.log(currentRow)
+        console.log(i)
+        row.push(<div key={`${i}_${j}`} className={`flex ${guesses[i][j][0] ? "border-gray-400" : "border-gray-500"} ${i < currentRow ? "" : "md:border-3 border-2"} md:w-24 w-18 ${currentRow == i ? "md:h-24 h-18 md:text-5xl text-3xl" : "md:h-6 h-5 md:text-xl text-lg"}  ${guesses[i][j][1]} font-semibold uppercase justify-center items-center`}>{guesses[i][j][0]}</div>)
+      }
+      rows.push(<div key={i} className="flex space-x-2 mb-2">{row}</div>)
+    }
+    return rows
   }
   const initializeKeyboard = () => {
     const keyboard = []
@@ -245,17 +248,17 @@ export default function Wordle({onEnter, onCorrect, wordOfDay}) {
             }
           })
         }
-        keyboard.push(<div key={`${i}`} className="flex md:space-x-2 space-x-1 md:mb-1 md:mt-1 md:mx-1 mb-1.5">{temp}</div>)
+        keyboard.push(<div key={`${i}`} className="flex w-full justify-center md:space-x-2 space-x-1 md:mb-1 md:mt-1 md:mx-1 mb-1.5">{temp}</div>)
       }
     return keyboard
   }
   let keyboard = initializeKeyboard()
   let rows = initalizeGrid()
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center w-full">
       {message && <div>{message}</div>}
       <div className="mb-12 flex flex-col">{rows}</div>
-      <div className="fixed bottom-4 items-center flex flex-col mb-20">{keyboard}</div>
+      <div className="fixed bottom-4 items-center flex flex-col mb-20 md:w-1/3 w-full">{keyboard}</div>
     </div>
   );
 }
