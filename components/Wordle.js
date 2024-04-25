@@ -250,7 +250,7 @@ export default function Wordle({onEnter, onCorrect, wordOfDay}) {
             }
           })
         }
-        keyboard.push(<div key={`${i}`} className="flex w-full text-white justify-center md:space-x-2 space-x-1 md:mb-1 md:mt-1 md:mx-1 mb-1.5">{temp}</div>)
+        keyboard.push(<div key={`${i}`} className="flex w-full dark:text-white text-black justify-center md:space-x-2 space-x-1 md:mb-1 md:mt-1 md:mx-1 mb-1.5">{temp}</div>)
       }
     return keyboard
   }
