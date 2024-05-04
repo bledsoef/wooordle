@@ -23,7 +23,7 @@ export default function Home() {
     <main className="h-screen items-center w-full mt-16 bg-neutral-900">
       <Navbar guesses={guessesCount} play={play}/>
       {!play && <LandingPage onPlay={handlePlay}/>}
-      {!(showModal || guessesCount == 10) && play && <Wordle onEnter={handleEnter} onCorrect={handleCorrect} wordOfDay={"phallic"}/>}
+      {!(showModal || guessesCount == 10) && play && <Wordle onEnter={handleEnter} onCorrect={handleCorrect} wordOfDay={"apartheid"}/>}
       {(showModal || guessesCount == 10) && <Modal guesses={guessesCount} correct={correct}/>}
     </main>
   );
